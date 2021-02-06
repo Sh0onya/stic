@@ -9,10 +9,6 @@ Installation Guide: <br/>
         5. Type in npm install<br/>
         6. Execute the run_server file<br/>
 
-#Snip of Account lists
-#![Account](https://user-images.githubusercontent.com/24636070/106957537-1d3c2600-675e-11eb-9cc2-1451216b2f4e.PNG)
 
-#Snip of Transactions and Balances
-#![Ledger](https://user-images.githubusercontent.com/24636070/106957540-1f9e8000-675e-11eb-8973-89b15d9ae239.PNG)
 
 
