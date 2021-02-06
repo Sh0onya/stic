@@ -1,0 +1,35 @@
+{
+  "name": "stic",
+  "version": "1.0.0",
+  "description": "STic is a study tracking tool. It is said that to master any topic or correctly remember it for lifetime one needs to revise it 5 times, i.e revision is the key to succeed in any exam. This tool helps you track your study and revision trail effectively so that you can give your best possible performance in the exam. I hope you would love it.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto-js": "^4.0.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs": "^2.0.0",
+    "express-ejs-layouts": "^2.5.0",
+    "init": "^0.1.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.13"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "devstart": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sh0onya/Ledger.git"
+  },
+  "author": "Prateek Dubey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sh0onya/Ledger/issues"
+  },
+  "homepage": "https://github.com/Sh0onya/Ledger#readme"
+}

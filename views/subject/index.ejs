@@ -1,0 +1,83 @@
+
+<%
+
+const percentage = new Intl.NumberFormat('en-IN', {
+  style:'percent',
+  minimumFractionDigits: 2,
+})
+%>
+
+<style>
+  .modal { overflow: visible; }
+.modal-body { overflow-y: visible !important; }
+</style>
+<% subject.forEach(element => { %>
+  <head><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script></head>
+<div class="section white ">
+    
+        <h2  class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0;">
+            <%=element.name%>
+        </h2>
+        <hr width="70%">
+                <div class="container">
+                    <table class="striped centered responsive-table">
+                        <thead>
+                          <tr>
+                              <th>Topic Count</th>
+                              <th>Avg. Revisions</th>
+                              <th>Finished</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+  
+                                  
+                          <tr style="font-weight:500;">
+                            <%
+                            fintage = element.nosion/(element.nopic*5)
+                              if(isNaN(fintage)){ 
+                                fintage = 0.00
+                                  }
+                                
+                            %>
+
+                            <td><%= (element.nopic)%></td>
+                            <td><%= (fintage*5)%></td>
+                            <td><%= percentage.format(fintage)%></td>
+                           
+                            
+                          </tr>
+                        </tbody>
+                      </table>
+               
+            </div>
+           
+
+                
+            <hr>
+            
+            <h4 class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0px; margin-bottom:-10px;">Topics</h4>
+            
+        <hr width="70%">
+        <%if(element.nopic == 0 ){%>
+          <h6 class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0px; margin-bottom:-10px;">Enlist a topic to get started</h6>
+          <br>
+          <hr width="70%">
+          <%}%>
+        <%if(element.nopic != 0 ){%>
+        <div class="container">
+          <table class="highlight centered responsive-table">
+              <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Revision 1</th>
+                    <th>Revision 2</th>
+                    <th>Revision 3</th>
+                    <th>Revision 4</th>
+                    <th>Revision 5</th>
+                    <th>Actions</th>
+                </tr>
+              </thead>
+              </table>
+              </div>
+              <%}%>
+  <%})%>

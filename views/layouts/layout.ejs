@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+        <title>STic | <%=title%></title>
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <meta name="turbolinks-cache-control" content="no-cache">
+        <meta name="author" content="Prateek Dubey">
+        <meta name="subject" content="Study Tracking Tool"/>
+        <meta name="classification" content="Finance"/>
+        <meta name="Language" content="English"/>
+        <meta name="Designer" content="Prateek Dubey"/>
+        <link rel="shortcut icon" href="../images/icon.png" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Roboto|Handlee" rel="stylesheet">
+        <style>
+            
+
+  ::placeholder{
+  color: black;
+}
+            html{
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+            
+            body{
+                width: 100%;
+                height: 100%;
+                overflow-y: scroll;
+                padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+                box-sizing: content-box; /* So the width will be 100% + 17px */
+            }
+            ::-webkit-scrollbar {
+                width: 0px;
+                background: transparent; /* make scrollbar transparent */
+            }
+            </style>
+    </head>
+    <nav id = "home" style="height: 60px;"class="light-blue darken-4">
+        <div class = "nav-wrapper">
+            <a style="font-family: 'Amatic SC', cursive; font-size: 45px; margin-left: 40px;"href="../">STic<img style=" margin-top:5px;margin-left:1px; width: 40px;" src="../images/icon.png"></a>
+            <h1 style="margin-right: 40px;font-size: 25px;font-family: Handlee; margin-top: 18px;" class="right"><a data-toggle="modal" class="modal-trigger" href="#options"><%=option%></a></h1>
+        </div>
+    </nav>
+    <%- body %>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <script>
+            $(document).ready
+                (function()
+                    {
+                        $('.modal').modal();
+                        $('select').formSelect();
+                    }
+                );    
+        </script>
+
+        <footer class="page-footer grey lighten-2">
+            <h2  class="header center light-blue-text text-darken-4" style="font-family:Amatic SC;margin-top: -18px;">STic</h2>
+            <h4 class="red-text text-darken-2 center header col s12 white-text" style="font-family:Handlee;">Track your studies the STic way</h4>
+            <hr width="70%">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <ul>
+                            <li>
+                                <p class="black-text text-darken-4"style="font-family: Handlee; font-size: 20px;">STic is a study tracking tool. It is said that to master any topic or correctly remember it for lifetime one needs to revise it 5 times, i.e revision is the key to succeed in any exam. This tool helps you track your study and revision trail effectively so that you can give your best possible performance in the exam. I hope you would love it.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright light-blue darken-4">
+                <div class="container"> &copy;
+                    <script> 
+                        var dateobj = new Date(); 
+                        var crntYear = dateobj.getUTCFullYear(); 
+                        document.write(crntYear);                     
+                    </script>  
+                    Sho0nya, Inc.
+                </div>
+            </div>
+        </footer>
+  </html>
