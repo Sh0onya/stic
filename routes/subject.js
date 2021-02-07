@@ -55,10 +55,11 @@ router.get('/:id', async (req, res) => {
   
   })*/
   router.put('/:id/:tid', async (req, res) => {
-    if(req.body.action == 'Delete'){
-      let subject = await Subject.findById(req.params.id)
+    let subject = await Subject.findById(req.params.id)
       let topic = subject.topic
       let entry = topic.find(entry => entry._id == req.params.tid)
+    if(req.body.action == 'Delete'){
+      
       if(entry.title == req.body.dtitle){
         entry.isActive = false
         subject.nopic -= 1
@@ -67,37 +68,38 @@ router.get('/:id', async (req, res) => {
       res.redirect('../'+req.params.id)
     }
     
-    /*
+    
     else if(req.body.action == 'Update'){
-      if(req.body.amount != 0){
-      const categoriesExpense = ["Food","Automobile","Donations","Groceries","Entertainment","Study","Travel/Vacation","Phone","House Hold","Health Care", "Gifts"]
-      const categoriesIncome = ["Savings","Salary","Interest","Gift"]
-      let account = await Account.findById(req.params.id)
-      let transaction = account.activity
-      let entry = transaction.find(entry => entry._id == req.params.tid)
-      entry.description = req.body.description
-      entry.postranbal = entry.postranbal - entry.amount
-      entry.amount = req.body.amount
-      entry.title = req.body.title
-      entry.category = req.body.category
-      checkExpense = categoriesIncome.includes(entry.category)
-      if(checkExpense){
-        entry.isexpense = false
+      if(entry.times == 0){
+          entry.rate = new Date()
+          entry.star = req.body.rating
       }
-      else{
-        entry.isexpense = true
-      }
-      if(entry.isexpense)
-      {
-        entry.amount *= -1.00
-      }
-      entry.postranbal = entry.postranbal + entry.amount
-      account.transum = entry.postranbal
-      await account.save()
+      else if(entry.times == 1){
+        entry.rbte = new Date()
+        entry.stbr = req.body.rating
     }
+    else if(entry.times == 2){
+      entry.rcte = new Date()
+      entry.stcr = req.body.rating
+  }
+  else if(entry.times == 3){
+    entry.rdte = new Date()
+    entry.stdr = req.body.rating
+}
+else if(entry.times == 4){
+  entry.rete = new Date()
+  entry.ster = req.body.rating
+}
+if(entry.times < 5){
+  entry.times +=1
+  subject.nosion += 1
+  await subject.save()
+}
+      
+      res.redirect('../'+req.params.id)
     }
-    res.redirect("../"+req.params.id)
-  */})
+    
+  })
 
   router.post('/', async (req, res) => {
     const subject = new Subject({

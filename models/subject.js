@@ -30,6 +30,26 @@ const topicSchema = new mongoose.Schema({
   rete:{
     type: Date
   },
+  star:{
+    type: Number,
+    default:0
+  },
+  stbr:{
+    type: Number,
+    default:0
+  },
+  stcr:{
+    type: Number,
+    default:0
+  },
+  stdr:{
+    type: Number,
+    default:0
+  },
+  ster:{
+    type: Number,
+    default:0
+  }
 })
 
 const subjectSchema = new mongoose.Schema({

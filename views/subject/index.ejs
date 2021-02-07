@@ -114,6 +114,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
               <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Days</th>
                     <th>Revision 1</th>
                     <th>Revision 2</th>
                     <th>Revision 3</th>
@@ -125,14 +126,112 @@ const percentage = new Intl.NumberFormat('en-IN', {
               <%}%>
               <tbody>
               <% element.topic.filter(topic => topic.isActive == true).forEach(topic => { %>
-                <tr>
-                <td><%=topic.title%></td>
-                <td><%=topic.rate%></td>
-                <td><%=topic.rbte%></td>
-                <td><%=topic.rcte%></td>
-                <td><%=topic.rdte%></td>
-                <td><%=topic.rete%></td>
-                <td><a  class="btn-floating btn-small red modal-trigger" data-toggle="modal" href="#d<%=topic._id%>"><i class="material-icons">delete</i></a>&nbsp;
+                <tr style="font-weight:500;">
+                  <%
+                  if(topic.times == 1)
+                  {
+                    days = Math.abs(new Date()-topic.rate)
+                  }
+                  else if(topic.times == 2)
+                  {
+                    days = Math.abs(new Date()-topic.rbte)
+                  }
+                  else if(topic.times == 3)
+                  {
+                    days = Math.abs(new Date()-topic.rcte)
+                  }
+                  else if(topic.times == 4)
+                  {
+                    days = Math.abs(new Date()-topic.rdte)
+                  }
+                  else{
+                    days = 0
+                  }
+                  days = Math.ceil(days / (1000 * 60 * 60 * 24));
+                  days -=1
+                  if(days < 0){
+                    days = 0
+                  }
+                  %>
+                  <%
+                      if(days <= 5)
+                      {
+                        coloring = "light-green"
+                      }
+                      else if((days > 5 && days < 10) && topic.times == 1)
+                      {
+                        coloring = "light-blue"
+                      }
+                      else if(days >= 10 && topic.times == 1)
+                      {
+                        coloring = "red"
+                      }
+                      else if(topic.times == 2 && days <= 15)
+                      {
+                        coloring = "light-green"
+                      }
+                      else if(topic.times == 2 && (days > 15 && days < 30))
+                      {
+                        coloring = "light-blue"
+                      }
+                      else if(topic.times == 2 && days >= 30)
+                      {
+                        coloring = "red"
+                      }
+                      else if(topic.times == 3 && days <= 45)
+                      {
+                        coloring = "light-green"
+                      }
+                      else if(topic.times == 3 && (days > 45 && days < 90))
+                      {
+                        coloring = "light-blue"
+                      }
+                      else if(topic.times == 3 && days >= 90)
+                      {
+                        coloring = "red"
+                      }
+                      else if(topic.times == 4 && days <= 90)
+                      {
+                        coloring = "light-green"
+                      }
+                      else if(topic.times == 4 && (days > 90 && days < 180))
+                      {
+                        coloring = "light-blue"
+                      }
+                      else if(days >= 180)
+                      {
+                        coloring = "red"
+                      }
+                      else if(topic.times == 5)
+                      {
+                        coloring = "light-green"
+                      }
+                      
+                  %>
+                 
+                <td class="<%=coloring%> darken-4 white-text"><%=topic.title%></td>
+                <td><%=days%></td>
+                <td class = "<%=(topic.star == 1?"green-text":(topic.star == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
+                var rate = moment(new Date("<%=topic.rate%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
+                document.write(rate == "Invalid date"?"":rate)
+                  </script></td>
+                <td class = "<%=(topic.stbr == 1?"green-text":(topic.stbr == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
+                  var rbte = moment(new Date("<%=topic.rbte%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
+                  document.write(rbte == "Invalid date"?"":rbte)
+                    </script></td>
+                <td class = "<%=(topic.stcr == 1?"green-text":(topic.stcr == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
+                  var rcte = moment(new Date("<%=topic.rcte%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
+                  document.write(rcte == "Invalid date"?"":rcte)
+                    </script></td>
+                <td class = "<%=(topic.stdr == 1?"green-text":(topic.stdr == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
+                  var rdte = moment(new Date("<%=topic.rdte%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
+                  document.write(rdte == "Invalid date"?"":rdte)
+                    </script></td>
+                <td class = "<%=(topic.ster == 1?"green-text":(topic.ster == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
+                  var rete = moment(new Date("<%=topic.rete%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
+                  document.write(rete == "Invalid date"?"":rete)
+                    </script></td>
+                <td class = "<%=(topic.star == 1?"green-text":(topic.star == 0?"yellow-text":"red-text"))%> text-darken-1"><a  class="btn-floating btn-small red modal-trigger" data-toggle="modal" href="#d<%=topic._id%>"><i class="material-icons">delete</i></a>&nbsp;
                   <a  class="btn-floating btn-small blue modal-trigger" data-toggle="modal" href="#u<%=topic._id%>"><i class="material-icons">edit</i></a></td>
               </tr>
               <div id = "u<%=topic._id%>" class="modal white">
@@ -140,7 +239,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
                 <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
                 
                   
-                    <form action="/account/<%=element._id%>/<%=topic._id%>?_method=PUT" method="POST">
+                    <form action="/subject/<%=element._id%>/<%=topic._id%>?_method=PUT" method="POST">
                      
                       <input name = "action" type="hidden" class="validate" required="" aria-required="true" value = "Update" />
                       <div class="row">
@@ -148,7 +247,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
                         <h6>How was your study/revision session?</h6>
                         <p>
                           <label>
-                            <input class="with-gap" name="rating" type="radio" value = "-1"/>
+                            <input class="with-gap" name="rating" type="radio" value = "1"/>
                             <span>Good</span>
                           </label>
                           <label>
@@ -156,7 +255,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
                             <span>Satisfactory</span>
                           </label>
                           <label>
-                            <input class="with-gap" name="rating" type="radio" value = "1"/>
+                            <input class="with-gap" name="rating" type="radio" value = "-1"/>
                             <span>Bad</span>
                           </label>
                         </p>
