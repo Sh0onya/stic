@@ -11,8 +11,52 @@ const percentage = new Intl.NumberFormat('en-IN', {
   .modal { overflow: visible; }
 .modal-body { overflow-y: visible !important; }
 </style>
+
+<div id = "options" class="modal white">
+  <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Select an Option</h5>
+  <hr width="85%">
+  <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+  <div class="container">
+    <div class="row center">
+      <div class="col s6"><a data-toggle="modal" class="modal-trigger btn green" href="#atopic">Add Topic</a></div>
+      <div class="col s6 "><a data-toggle="modal" class="modal-trigger btn blue" href="#dsubject">Delete Subject</a></div>
+    </div>
+  </div>
+</div>
 <% subject.forEach(element => { %>
   <head><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script></head>
+  <div id = "atopic" class="modal white">
+    <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Add Topic</h5>
+    <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+    <form action="/subject/<%=element._id%>?_method=PUT" method="POST">
+    <div class="row">
+      <div class="input-field col s6 offset-s3 center">
+      <p>Enter the name of the topic</p>
+      <input name = "aname" type="text" placeholder = "Topic Name" class="validate" required="" aria-required="true" value = "">
+      <input name = "action" type="hidden" placeholder = "Password" class="validate" required="" aria-required="true" value = "Add" />
+  </div>
+      </div>
+    <div class="input-field col s12 center">
+          <input class="btn light-blue darken-4 white-text" value="ADD" type="submit">
+        </div>
+      </form>
+  </div>
+  <div id = "dsubject" class="modal white">
+    <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Delete Subject</h5>
+    <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+    <form action="/subject/<%=element._id%>?_method=PUT" method="POST">
+    <div class="row">
+      <div class="input-field col s6 offset-s3 center">
+      <p>Enter the name of the subject "<strong><%=element.name%></strong>" to delete it</p>
+      <input name = "dname" type="text" placeholder = "Subject Name" class="validate" required="" aria-required="true" value = "">
+      <input name = "action" type="hidden" placeholder = "Password" class="validate" required="" aria-required="true" value = "Delete" />
+  </div>
+      </div>
+    <div class="input-field col s12 center">
+          <input class="btn light-blue darken-4 white-text" value="DELETE" type="submit">
+        </div>
+      </form>
+  </div>
 <div class="section white ">
     
         <h2  class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0;">
@@ -58,14 +102,15 @@ const percentage = new Intl.NumberFormat('en-IN', {
             <h4 class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0px; margin-bottom:-10px;">Topics</h4>
             
         <hr width="70%">
+        <div class="container">
+          <table class="highlight centered responsive-table">
         <%if(element.nopic == 0 ){%>
           <h6 class="header center blue-text text-darken-4" style="font-family:Roboto; margin-top: 0px; margin-bottom:-10px;">En-list a topic to get started</h6>
           <br>
           <hr width="70%">
           <%}%>
         <%if(element.nopic != 0 ){%>
-        <div class="container">
-          <table class="highlight centered responsive-table">
+        
               <thead>
                 <tr>
                     <th>Title</th>
@@ -77,7 +122,75 @@ const percentage = new Intl.NumberFormat('en-IN', {
                     <th>Actions</th>
                 </tr>
               </thead>
-              </table>
-              </div>
               <%}%>
+              <tbody>
+              <% element.topic.filter(topic => topic.isActive == true).forEach(topic => { %>
+                <tr>
+                <td><%=topic.title%></td>
+                <td><%=topic.rate%></td>
+                <td><%=topic.rbte%></td>
+                <td><%=topic.rcte%></td>
+                <td><%=topic.rdte%></td>
+                <td><%=topic.rete%></td>
+                <td><a  class="btn-floating btn-small red modal-trigger" data-toggle="modal" href="#d<%=topic._id%>"><i class="material-icons">delete</i></a>&nbsp;
+                  <a  class="btn-floating btn-small blue modal-trigger" data-toggle="modal" href="#u<%=topic._id%>"><i class="material-icons">edit</i></a></td>
+              </tr>
+              <div id = "u<%=topic._id%>" class="modal white">
+                <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Update Topic</h5>
+                <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+                
+                  
+                    <form action="/account/<%=element._id%>/<%=topic._id%>?_method=PUT" method="POST">
+                     
+                      <input name = "action" type="hidden" class="validate" required="" aria-required="true" value = "Update" />
+                      <div class="row">
+                      <div class="input-field col s6 offset-s3 center">
+                        <h6>How was your study/revision session?</h6>
+                        <p>
+                          <label>
+                            <input class="with-gap" name="rating" type="radio" value = "-1"/>
+                            <span>Good</span>
+                          </label>
+                          <label>
+                            <input class="with-gap" name="rating" type="radio" value = "0"/>
+                            <span>Satisfactory</span>
+                          </label>
+                          <label>
+                            <input class="with-gap" name="rating" type="radio" value = "1"/>
+                            <span>Bad</span>
+                          </label>
+                        </p>
+                    </div>
+                    
+                    <div class="input-field col s6 offset-s3 left center" style="width: 50%;">
+                      <input class="btn light-blue darken-4 white-text" value="UPDATE" type="submit">
+                    </div>
+                  </div>
+                    </form>
+                  
+                
+              </div>
+              <div id = "d<%=topic._id%>" class="modal white">
+                <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Delete Topic</h5>
+                <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+                <form action="/subject/<%=element._id%>/<%=topic._id%>?_method=PUT" method="POST">
+                <div class="row">
+                  <div class="input-field col s6 offset-s3 center">
+                  <p>Enter the name of the topic "<strong><%=topic.title%></strong>" to delete it</p>
+                  <input name = "dtitle" type="text" placeholder = "Topic Title" class="validate" required="" aria-required="true" value = "">
+                  <input name = "action" type="hidden" placeholder = "Password" class="validate" required="" aria-required="true" value = "Delete" />
+              </div>
+                  </div>
+                <div class="input-field col s12 center">
+                      <input class="btn light-blue darken-4 white-text" value="DELETE" type="submit">
+                    </div>
+                  </form>
+              </div>
+                <%})%>
+              
+              </tbody>
+            </table>
+          </div>
+            </div>
+
   <%})%>

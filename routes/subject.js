@@ -13,15 +13,28 @@ router.get('/:id', async (req, res) => {
     const subject = await Subject.find(searchOptions)
     res.render('subject/index', {title:subject[0].name, subject: subject, option: "\u2630"});
     //res.send(subject[0].name)
-  })/*
+  })
   router.put('/:id/', async (req, res) => {
-    let account = await Account.findById(req.params.id)
-    if(req.body.action == 'UpBal')
+    let subject = await Subject.findById(req.params.id)
+    if(req.body.action == 'Delete')
     {
-      account.currbal = req.body.currbal
-    await account.save()
-    res.redirect(req.params.id)
+      if(subject.name == req.body.dname){
+        subject.isActive = false
+        await subject.save()
+    res.redirect('../')
     }
+    }
+    else if(req.body.action == 'Add')
+    {
+      newTopic = {title: req.body.aname}
+      subject.nopic += 1
+      subject.topic.push(newTopic)
+      await subject.save()
+      res.redirect(req.params.id)
+    }
+  
+  
+  })/*
     else if(req.body.action == 'Creatran')
     {
       if(req.body.amount != 0){
@@ -40,21 +53,21 @@ router.get('/:id', async (req, res) => {
       }
       }
   
-  })
+  })*/
   router.put('/:id/:tid', async (req, res) => {
     if(req.body.action == 'Delete'){
-      let account = await Account.findById(req.params.id)
-      let transaction = account.activity
-      let entry = transaction.find(entry => entry._id == req.params.tid)
-      validate = ((CryptoJS.createHash('sha256').update(req.body.pass).digest('hex')) == account.passWord)
-      if(validate){
+      let subject = await Subject.findById(req.params.id)
+      let topic = subject.topic
+      let entry = topic.find(entry => entry._id == req.params.tid)
+      if(entry.title == req.body.dtitle){
         entry.isActive = false
-        account.transum = account.transum - entry.amount
-        await account.save()
+        subject.nopic -= 1
       }
+      await subject.save()
+      res.redirect('../'+req.params.id)
     }
     
-    
+    /*
     else if(req.body.action == 'Update'){
       if(req.body.amount != 0){
       const categoriesExpense = ["Food","Automobile","Donations","Groceries","Entertainment","Study","Travel/Vacation","Phone","House Hold","Health Care", "Gifts"]
@@ -84,8 +97,8 @@ router.get('/:id', async (req, res) => {
     }
     }
     res.redirect("../"+req.params.id)
-  })
-*/
+  */})
+
   router.post('/', async (req, res) => {
     const subject = new Subject({
       name: req.body.name,
