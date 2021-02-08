@@ -12,7 +12,7 @@ Installation Guide: <br/>
 Home Snip
 ![Home](https://user-images.githubusercontent.com/24636070/107175698-82f51000-69f3-11eb-9775-017705a39ee0.PNG)        
 Subject Snip
-![Subject](https://user-images.githubusercontent.com/24636070/106957537-1d3c2600-675e-11eb-9cc2-1451216b2f4e.PNG)
+![Subject](https://user-images.githubusercontent.com/24636070/107175697-81c3e300-69f3-11eb-81e9-0ffaf633dda5.PNG)
 
 
 
