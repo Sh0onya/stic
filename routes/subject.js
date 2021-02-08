@@ -63,6 +63,7 @@ router.get('/:id', async (req, res) => {
       if(entry.title == req.body.dtitle){
         entry.isActive = false
         subject.nopic -= 1
+        subject.nosion -= entry.times
       }
       await subject.save()
       res.redirect('../'+req.params.id)
