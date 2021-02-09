@@ -113,7 +113,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
           <hr width="70%">
           <%}%>
         <%if(element.nopic != 0 ){%>
-          <input class="form-control" id="myInput" type="text" placeholder="&#128269;Type in to Search">
+          <input  id="myInput" type="text" placeholder="&#128269;Type in to Search">
               <thead>
                 <tr>
                     <th>Title</th>
@@ -127,7 +127,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
                 </tr>
               </thead>
               <%}%>
-              <tbody>
+              <tbody id = "myTable">
               <% element.topic.filter(topic => topic.isActive == true).forEach(topic => { %>
                 <tr style="font-weight:500;">
                   <%
