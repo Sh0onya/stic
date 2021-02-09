@@ -63,8 +63,11 @@ const percentage = new Intl.NumberFormat('en-IN', {
             <%=element.name%>
         </h2>
         <hr width="70%">
+        
                 <div class="container">
+                  
                     <table class="striped centered responsive-table">
+
                         <thead>
                           <tr>
                               <th>Topic Count</th>
@@ -72,7 +75,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
                               <th>Finished</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
   
                                   
                           <tr style="font-weight:500;">
@@ -110,7 +113,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
           <hr width="70%">
           <%}%>
         <%if(element.nopic != 0 ){%>
-        
+          <input class="form-control" id="myInput" type="text" placeholder="&#128269;Type in to Search">
               <thead>
                 <tr>
                     <th>Title</th>
