@@ -33,7 +33,9 @@ const percentage = new Intl.NumberFormat('en-IN', {
       <div class="input-field col s6 offset-s3 center">
       <p>Enter the name of the topic</p>
       <input name = "aname" type="text" placeholder = "Topic Name" class="validate" required="" aria-required="true" value = "">
+      <input name = "mlink" type="text" placeholder = "Music Link (Optional)">
       <input name = "action" type="hidden" placeholder = "Password" class="validate" required="" aria-required="true" value = "Add" />
+      
   </div>
       </div>
     <div class="input-field col s12 center">
@@ -117,6 +119,7 @@ const percentage = new Intl.NumberFormat('en-IN', {
               <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Music</th>
                     <th>Days</th>
                     <th>Revision 1</th>
                     <th>Revision 2</th>
@@ -211,8 +214,26 @@ const percentage = new Intl.NumberFormat('en-IN', {
                       }
                       
                   %>
+                  <%
+                    if(topic.music == 'Nothing')
+                    {
+                      topicMusic = '+ Music'
+                      link = "#ml"+topic._id
+                      classes = 'modal-trigger black-text'
+                      newTab = ""
+                      openModal = "modal"
+                    }
+                    else{
+                      topicMusic = '▶ Music'
+                      classes = 'black-text'
+                      link = topic.music
+                      newTab = "target = _blank"
+                      openModal = ""
+                    }
+                  %>
                  
                 <td class="<%=coloring%> darken-4 white-text"><%=topic.title%></td>
+                <td><a data-toggle=<%=openModal%> class = <%=classes%> <%=newTab%> href = <%=link%>><%=topicMusic%></a></td>
                 <td><%=days%></td>
                 <td class = "<%=(topic.star == 1?"green-text":(topic.star == 0?"blue-text":"red-text"))%> text-darken-2"><script type="text/javascript">
                 var rate = moment(new Date("<%=topic.rate%>"),"ddd MMM DD YYYY HH:MM:SS ZZ").format("ddd, MMM DD")
@@ -237,6 +258,23 @@ const percentage = new Intl.NumberFormat('en-IN', {
                 <td class = "<%=(topic.star == 1?"green-text":(topic.star == 0?"yellow-text":"red-text"))%> text-darken-1"><a  class="btn-floating btn-small red modal-trigger" data-toggle="modal" href="#d<%=topic._id%>"><i class="material-icons">delete</i></a>&nbsp;
                   <a  class="btn-floating btn-small blue modal-trigger" data-toggle="modal" href="#u<%=topic._id%>"><i class="material-icons">edit</i></a></td>
               </tr>
+              <div id = "ml<%=topic._id%>" class="modal white">
+                <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Add Music</h5>
+                <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>
+                    <form action="/subject/<%=element._id%>/<%=topic._id%>?_method=PUT" method="POST">
+                      <input name = "action" type="hidden" class="validate" required="" aria-required="true" value = "Music" />
+                      <div class="row">
+                      <div class="input-field col s6 offset-s3 center">
+                        <input name = "mlink" type="text" placeholder = "Music Link" class="validate" required="" aria-required="true" value = "">
+                    </div>
+                    <div class="input-field col s6 offset-s3 left center" style="width: 50%;">
+                      <input class="btn light-blue darken-4 white-text" value="Add" type="submit">
+                    </div>
+                  </div>
+                    </form>
+                  
+                
+              </div>
               <div id = "u<%=topic._id%>" class="modal white">
                 <h5 class="header center light-blue-text text-darken-4" style="font-family:Roboto;">Update Topic</h5>
                 <a class="modal-close waves-effect waves-grey btn-flat right" style="top: -45px;"><i class="material-icons">close</i></a>

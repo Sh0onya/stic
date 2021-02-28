@@ -7,6 +7,10 @@ const topicSchema = new mongoose.Schema({
   title: {
     type: String
   },
+  music:{
+    type:String,
+    default: "Nothing"
+  },
   times: {
     type: Number,
     default: 0    

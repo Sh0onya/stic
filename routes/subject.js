@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
     }
     else if(req.body.action == 'Add')
     {
-      newTopic = {title: req.body.aname}
+      newTopic = {title: req.body.aname,music:req.body.mlink==''?"Nothing":req.body.mlink}
       subject.nopic += 1
       subject.topic.push(newTopic)
       await subject.save()
@@ -68,7 +68,11 @@ router.get('/:id', async (req, res) => {
       await subject.save()
       res.redirect('../'+req.params.id)
     }
-    
+    else if(req.body.action == 'Music'){
+      entry.music = req.body.mlink
+      await subject.save()
+      res.redirect('../'+req.params.id)
+    }
     
     else if(req.body.action == 'Update'){
       if(entry.times == 0){
