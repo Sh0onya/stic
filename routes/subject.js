@@ -11,7 +11,7 @@ router.get('/:id', async (req, res) => {
     let searchOptions = {}
     searchOptions._id = req.params.id
     const subject = await Subject.find(searchOptions)
-    res.render('subject/index', {title:subject[0].name, subject: subject, option: "\u2630"});
+    res.render('subject/index', {title:subject[0].name, subject: subject, option: ""});
     //res.send(subject[0].name)
   })
   router.put('/:id/', async (req, res) => {
