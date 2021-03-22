@@ -34,26 +34,7 @@ router.get('/:id', async (req, res) => {
     }
   
   
-  })/*
-    else if(req.body.action == 'Creatran')
-    {
-      if(req.body.amount != 0){
-        const categoriesExpense = ["Food","Automobile","Donations","Groceries","Entertainment","Study","Travel/Vacation","Phone","House Hold","Health Care", "Gifts"]
-        const categoriesIncome = ["Savings","Salary","Interest","Gift"]
-        let account = await Account.findById(req.params.id)
-        let transaction = account.activity
-        checkExpense = categoriesIncome.includes(req.body.category)
-        actualAmount = (checkExpense?req.body.amount*1.00:req.body.amount*-1.00)
-        let newTransaction = {title: req.body.title, amount: actualAmount, category: req.body.category, description: req.body.description, isexpense: !checkExpense, postranbal: ((account.transum+actualAmount)*1.00)}
-        account.activity.push(newTransaction)
-        account.transum = (account.transum+actualAmount)*1.00
-        //res.send(newTransaction)
-        await account.save()
-        res.redirect("../"+req.params.id)
-      }
-      }
-  
-  })*/
+  })
   router.put('/:id/:tid', async (req, res) => {
     let subject = await Subject.findById(req.params.id)
       let topic = subject.topic
